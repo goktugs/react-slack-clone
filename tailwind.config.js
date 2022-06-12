@@ -9,6 +9,7 @@ module.exports = {
       },
       gridTemplateColumns: {
         main: '260px auto',
+        sidebarChannel: '15% auto',
       },
     },
   },

@@ -3,7 +3,7 @@ import { ClockIcon, QuestionMarkCircleIcon } from '@heroicons/react/outline';
 
 export default function Header() {
   return (
-    <div className="bg-purple-800 text-white flex items-center justify-between">
+    <div className="bg-[#350D36] text-white flex items-center justify-center relative z-10 shadow-[0_1px_0_0_rgba(255,255,255,0.1)]">
       <leftPart className="flex mx-4">
         <ClockIcon className="h-5 w-5 text-white" />
         <searchContainer className="min-w-[400px] mx-4 ">
@@ -17,7 +17,7 @@ export default function Header() {
         </searchContainer>
         <QuestionMarkCircleIcon className="h-5 w-5 text-white" />
       </leftPart>
-      <userContainer className="flex items-center pr-4">
+      <userContainer className="flex items-center pr-4 absolute right-0">
         <name className="pr-4">Goktug</name>
         <userImage className="w-7 h-7 border-2 border-solid border-white rounded-sm">
           <img
