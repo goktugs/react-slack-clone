@@ -3,6 +3,7 @@ import { PlusIcon } from '@heroicons/react/outline';
 import { sidebarItemsData } from '../utils/sidebarItemsData';
 import { collection, addDoc } from 'firebase/firestore';
 import db from '../db/firebase';
+import { useHistory } from 'react-router-dom';
 
 export default function Sidebar({ rooms }) {
   const addChannel = () => {
@@ -11,6 +12,14 @@ export default function Sidebar({ rooms }) {
       addDoc(collection(db, 'rooms'), {
         name: channelName,
       });
+    }
+  };
+
+  const history = useHistory();
+
+  const goToChannel = (id) => {
+    if (id) {
+      history.push(`/room/${id}`);
     }
   };
 
@@ -26,21 +35,24 @@ export default function Sidebar({ rooms }) {
         {sidebarItemsData.map((item, idx) => (
           <div
             key={idx}
-            className="text-gray-500 grid grid-cols-sidebarChannel h-7 item-center pl-5 cursor-pointer hover:bg-[#350D36] "
+            className="text-gray-300 grid grid-cols-sidebarChannel h-7 content-center pl-5 cursor-pointer hover:bg-[#350D36] items-center mb-2 "
           >
-            {item.icon}
-            {item.text}
+            <span className="mr-1"> {item.icon}</span>
+            <span>{item.text}</span>
           </div>
         ))}
       </div>
-      <div className="text-gray-500 mt-3">
+      <div className="text-gray-300 mt-3">
         <div className="flex justify-between items-center h-7 pl-5 pr-3">
-          <div>channels</div>
+          <div>Channels</div>
           <PlusIcon className="w-5 h-5 cursor-pointer" onClick={addChannel} />
         </div>
         <div>
           {rooms.map((room, idx) => (
             <div
+              onClick={() => {
+                goToChannel(room.id);
+              }}
               key={idx}
               className="h-7 flex item-center pl-5 cursor-pointer hover:bg-[#350d36]"
             >

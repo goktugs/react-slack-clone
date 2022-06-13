@@ -42,9 +42,10 @@ function App({ children }) {
           <Main>
             {rooms.length && <Sidebar rooms={rooms} />}
             <Switch>
-              <Route path="/room" exact>
+              <Route path="/room/:channelId">
                 <Chat />
               </Route>
+              <Route path="/">Select or Create Channel</Route>
               {/* <Route path="/" exact>
                 <Login />
               </Route> */}
