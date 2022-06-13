@@ -14,15 +14,6 @@ import { collection, getDocs } from 'firebase/firestore';
 function App({ children }) {
   const [rooms, setRooms] = useState([]);
 
-  // async function getCities(db) {
-  //   const citiesCol = collection(db, 'rooms');
-  //   const citySnapshot = await getDocs(citiesCol);
-  //   const cityList = citySnapshot.docs.map((doc) => doc.data());
-  //   console.log(cityList);
-  // }
-
-  // getCities(db);
-
   const getRooms = async () => {
     const roomsCol = collection(db, 'rooms');
     const roomsSnapshot = await getDocs(roomsCol);
@@ -33,8 +24,6 @@ function App({ children }) {
   useEffect(() => {
     getRooms();
   }, []);
-
-  console.log(rooms);
 
   return (
     <Router>

@@ -1,9 +1,18 @@
 import React from 'react';
 import { PlusIcon } from '@heroicons/react/outline';
 import { sidebarItemsData } from '../utils/sidebarItemsData';
+import { collection, addDoc } from 'firebase/firestore';
+import db from '../db/firebase';
 
 export default function Sidebar({ rooms }) {
-  console.log(rooms);
+  const addChannel = () => {
+    const channelName = prompt('Enter Channel Name');
+    if (channelName) {
+      addDoc(collection(db, 'rooms'), {
+        name: channelName,
+      });
+    }
+  };
 
   return (
     <div className="bg-[#3F0E40]">
@@ -27,11 +36,14 @@ export default function Sidebar({ rooms }) {
       <div className="text-gray-500 mt-3">
         <div className="flex justify-between items-center h-7 pl-5 pr-3">
           <div>channels</div>
-          <PlusIcon className="w-5 h-5" />
+          <PlusIcon className="w-5 h-5 cursor-pointer" onClick={addChannel} />
         </div>
         <div>
-          {rooms.map((room) => (
-            <div className="h-7 flex item-center pl-5 cursor-pointer hover:bg-[#350d36]">
+          {rooms.map((room, idx) => (
+            <div
+              key={idx}
+              className="h-7 flex item-center pl-5 cursor-pointer hover:bg-[#350d36]"
+            >
               # {room.name}
             </div>
           ))}

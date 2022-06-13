@@ -6,6 +6,7 @@ module.exports = {
       gridTemplateRows: {
         // Complex site-specific row configuration
         container: '38px auto',
+        chat: '64px auto min-content ',
       },
       gridTemplateColumns: {
         main: '260px auto',
