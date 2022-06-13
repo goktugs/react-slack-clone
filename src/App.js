@@ -7,13 +7,41 @@ import Sidebar from './components/Sidebar';
 import Container from './layout/Container';
 import Main from './layout/Main';
 
+import db from './db/firebase';
+import { useEffect, useState } from 'react';
+import { collection, getDocs } from 'firebase/firestore';
+
 function App({ children }) {
+  const [rooms, setRooms] = useState([]);
+
+  // async function getCities(db) {
+  //   const citiesCol = collection(db, 'rooms');
+  //   const citySnapshot = await getDocs(citiesCol);
+  //   const cityList = citySnapshot.docs.map((doc) => doc.data());
+  //   console.log(cityList);
+  // }
+
+  // getCities(db);
+
+  const getRooms = async () => {
+    const roomsCol = collection(db, 'rooms');
+    const roomsSnapshot = await getDocs(roomsCol);
+    const roomsList = roomsSnapshot.docs.map((doc) => doc.data());
+    setRooms(roomsList);
+  };
+
+  useEffect(() => {
+    getRooms();
+  }, []);
+
+  console.log(rooms);
+
   return (
     <Router>
       <Container>
         <Header />
         <Main>
-          <Sidebar />
+          {rooms.length && <Sidebar rooms={rooms} />}
           <Switch>
             <Route path="/room">
               <Chat />
