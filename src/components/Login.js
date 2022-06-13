@@ -10,13 +10,11 @@ export default function Login(props) {
           name: result.user.displayName,
           photo: result.user.photoURL,
         };
+        localStorage.setItem('user', JSON.stringify(newUser));
         props.setUser(newUser);
       })
       .catch((err) => {
-        const errorCode = err.code;
-        const errorMessage = err.message;
-        // The email of the user's account used.
-        const email = err.customData.email;
+        alert(err);
       });
   };
 
