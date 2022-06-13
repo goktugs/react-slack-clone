@@ -13,6 +13,7 @@ import { collection, getDocs } from 'firebase/firestore';
 
 function App({ children }) {
   const [rooms, setRooms] = useState([]);
+  const [user, setUser] = useState();
 
   const getRooms = async () => {
     const roomsCol = collection(db, 'rooms');
@@ -27,20 +28,24 @@ function App({ children }) {
 
   return (
     <Router>
-      <Container>
-        <Header />
-        <Main>
-          {rooms.length && <Sidebar rooms={rooms} />}
-          <Switch>
-            <Route path="/room">
-              <Chat />
-            </Route>
-            <Route path="/">
-              <Login />
-            </Route>
-          </Switch>
-        </Main>
-      </Container>
+      {!user ? (
+        <Login setUser={setUser} />
+      ) : (
+        <Container>
+          <Header user={user} />
+          <Main>
+            {rooms.length && <Sidebar rooms={rooms} />}
+            <Switch>
+              <Route path="/room" exact>
+                <Chat />
+              </Route>
+              {/* <Route path="/" exact>
+                <Login />
+              </Route> */}
+            </Switch>
+          </Main>
+        </Container>
+      )}
     </Router>
   );
 }
