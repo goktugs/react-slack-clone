@@ -1,7 +1,7 @@
 import React from 'react';
 import { ClockIcon, QuestionMarkCircleIcon } from '@heroicons/react/outline';
 
-export default function Header({ user }) {
+export default function Header({ user, signOut }) {
   return (
     <div className="bg-[#350D36] text-white flex items-center justify-center relative z-10 shadow-[0_1px_0_0_rgba(255,255,255,0.1)]">
       <div className="flex mx-4">
@@ -19,7 +19,10 @@ export default function Header({ user }) {
       </div>
       <div className="flex items-center pr-4 absolute right-0">
         <div className="pr-4"> {user.name} </div>
-        <div className="w-7 h-7 border-2 border-solid border-white rounded-sm">
+        <div
+          onClick={signOut}
+          className="w-7 h-7 border-2 border-solid border-white rounded-sm cursor-pointer"
+        >
           <img
             className="w-full"
             src={user.photo ? user.photo : 'https://picsum.photos/id/237/28/28'}
