@@ -4,7 +4,7 @@ import { ClockIcon, QuestionMarkCircleIcon } from '@heroicons/react/outline';
 export default function Header({ user, signOut }) {
   return (
     <div className="bg-[#350D36] text-white flex items-center justify-center relative z-10 shadow-[0_1px_0_0_rgba(255,255,255,0.1)]">
-      <div className="flex mx-4 item-center justify-center">
+      <div className="flex mx-4 items-center justify-center">
         <ClockIcon className="h-5 w-5 text-white" />
         <div className="min-w-[400px] mx-4 ">
           <div className="flex items-center rounded-md w-full shadow-inner">

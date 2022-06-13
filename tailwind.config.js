@@ -5,7 +5,7 @@ module.exports = {
     extend: {
       gridTemplateRows: {
         // Complex site-specific row configuration
-        container: '38px auto',
+        container: '38px minmax(0, 1fr)',
         chat: '64px auto min-content ',
       },
       gridTemplateColumns: {

@@ -4,14 +4,11 @@ import Login from './components/Login';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 
-import Container from './layout/Container';
-import Main from './layout/Main';
-
 import db, { auth } from './db/firebase';
 import { useEffect, useState } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 
-function App({ children }) {
+function App() {
   const [rooms, setRooms] = useState([]);
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
 
@@ -37,21 +34,21 @@ function App({ children }) {
       {!user ? (
         <Login setUser={setUser} />
       ) : (
-        <Container>
+        <div className="w-full h-screen grid grid-rows-container">
           <Header user={user} signOut={signOut} />
-          <Main>
+          <main className="grid grid-cols-main">
             {rooms.length && <Sidebar rooms={rooms} />}
             <Switch>
               <Route path="/room/:channelId">
-                <Chat />
+                <Chat user={user} />
               </Route>
               <Route path="/">Select or Create Channel</Route>
               {/* <Route path="/" exact>
                 <Login />
               </Route> */}
             </Switch>
-          </Main>
-        </Container>
+          </main>
+        </div>
       )}
     </Router>
   );
